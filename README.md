@@ -2,8 +2,37 @@
 
 ![image](https://user-images.githubusercontent.com/96280/163298419-6279f338-069e-4302-971f-b9d2e5fc9f7a.png)
 
+
 ## Demo
 https://youtu.be/f_1IkUHFdH8
+# JoyDance for JD Melody
+
+Connect your phone or compatible motion controller to **JD Melody** using JoyDance.
+
+## 🎮 How to Connect JD Melody
+
+1. **Launch JD Melody** and set the game mode to **Fast**. Select your preferred platform: Xbox One, PlayStation, or Nintendo Switch.
+2. **Find your local IPv4 address:**
+
+   * Open Command Prompt (`CMD`).
+   * Run `ipconfig`.
+   * Look for the **IPv4 Address** under your active network adapter.
+3. **Open JD Melody** and select **"Use Your Phone"**.
+4. **Launch JoyDance**, enter your IPv4 address, and click **Connect**.
+
+Make sure your computer and phone are connected to the same local network.
+
+## 🎮 Using Nintendo Switch 2 Controllers
+
+If you're using **Nintendo Switch 2 (NS2) controllers**, you'll also need **Joy2Win-Melody** to enable controller support.
+
+Get it here: [Joy2Win-Melody](https://github.com/Dywrench/Joy2Win-Melody)
+
+## ⚠️ Notes
+
+* Your IPv4 address may change when you reconnect to your network.
+* Allow JoyDance and JD Melody through your firewall if the connection is blocked.
+* This project is intended to work with JD Melody's phone-controller connection mode.
 
 ## Features
 - Play Just Dance 2016 and later on all platforms with Joy-Cons.
