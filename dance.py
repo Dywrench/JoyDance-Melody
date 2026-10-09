@@ -16,6 +16,7 @@ from joydance import JoyDance, PairingState
 from joydance.constants import (DEFAULT_CONFIG, JOYDANCE_VERSION,
                                 WsSubprotocolVersion)
 from pycon import ButtonEventJoyCon, JoyCon
+from dsu_joycon import DSUJoyCon
 from pycon.constants import JOYCON_PRODUCT_IDS, JOYCON_VENDOR_ID
 
 logging.getLogger('asyncio').setLevel(logging.WARNING)
@@ -62,6 +63,14 @@ async def get_device_ids():
             'product_string': product_string,
         })
 
+    # Añadir el mando virtual DSU.
+    out.append({
+        'vendor_id': JOYCON_VENDOR_ID,
+        'product_id': 8199,
+        'serial': 'DSU_RIGHT',
+        'product_string': 'Joy-Con DSU (virtual)',
+    })
+
     return out
 
 
@@ -72,6 +81,19 @@ async def get_joycon_list(app):
     for dev in devices:
         if dev['serial'] in app['joycons_info']:
             info = app['joycons_info'][dev['serial']]
+        elif dev['serial'] == 'DSU_RIGHT':
+            info = {
+                'vendor_id': dev['vendor_id'],
+                'product_id': dev['product_id'],
+                'serial': dev['serial'],
+                'name': dev['product_string'],
+                'color': '#e60012',
+                'battery_level': 4,
+                'is_left': False,
+                'state': PairingState.IDLE.value,
+                'pairing_code': '',
+            }
+            app['joycons_info'][dev['serial']] = info
         else:
             joycon = JoyCon(dev['vendor_id'], dev['product_id'], dev['serial'])
             # Wait for initial data
@@ -151,7 +173,10 @@ async def connect_joycon(app, ws, data):
     else:
         app['joycons_info'][serial]['pairing_code'] = ''
 
-    joycon = ButtonEventJoyCon(vendor_id, product_id, serial)
+    if serial == 'DSU_RIGHT':
+        joycon = DSUJoyCon(is_left=False)
+    else:
+        joycon = ButtonEventJoyCon(vendor_id, product_id, serial)
 
     if pairing_method == PairingMethod.OLD.value:
         protocol_version = WsSubprotocolVersion.V1

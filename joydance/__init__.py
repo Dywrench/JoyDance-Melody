@@ -417,9 +417,9 @@ class JoyDance:
                     self.pairing_url,
                     subprotocols=[subprotocol],
                     sock=self.console_conn,
-                    ssl=ssl_context,
+                    ssl=ssl_context if self.pairing_url.startswith('wss://') else None,
                     ping_timeout=None,
-                    server_hostname=server_hostname
+                    server_hostname=server_hostname if self.pairing_url.startswith('wss://') else None
             ) as websocket:
                 try:
                     self.ws = websocket
@@ -453,7 +453,7 @@ class JoyDance:
                 if self.protocol_version == WsSubprotocolVersion.V1:
                     self.pairing_url = 'ws://{}:8080/smartphone'.format(self.console_ip_addr)
                 else:
-                    self.pairing_url = 'wss://{}:8080/smartphone'.format(self.console_ip_addr)
+                    self.pairing_url = 'ws://{}:8080/smartphone'.format(self.console_ip_addr)
             else:
                 await self.on_state_changed(self.joycon.serial, PairingState.GETTING_TOKEN)
                 print('Getting authorication token...')
