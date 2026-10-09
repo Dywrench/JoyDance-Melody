@@ -11,14 +11,14 @@ Connect your phone or compatible motion controller to **JD Melody** using JoyDan
 
 ## 🎮 How to Connect JD Melody
 
-1. **Launch JD Melody** and set the game mode to **Fast**. Select your preferred platform: Xbox One, PlayStation, or Nintendo Switch.
+1. **Launch JoyDance - Melody** and set the game mode to **Fast**. Select your preferred platform: Xbox One, PlayStation, or Nintendo Switch.
 2. **Find your local IPv4 address:**
 
    * Open Command Prompt (`CMD`).
    * Run `ipconfig`.
    * Look for the **IPv4 Address** under your active network adapter.
 3. **Open JD Melody** and select **"Use Your Phone"**.
-4. **Launch JoyDance**, enter your IPv4 address, and click **Connect**.
+4. **In JoyDance**, enter your IPv4 address, and click **Connect**.
 
 Make sure your computer and phone are connected to the same local network.
 
